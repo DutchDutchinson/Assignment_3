@@ -1,27 +1,15 @@
-best <- function (state,outcome){
+best <- function (state, outcome){
   
-allData <- read.csv("outcome-of-care-measures.csv")
+allData <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
   stateData <- data.frame()
-  stateData <- stateData <- allData[allData$State =="state"]
+  stateData <- allData[allData$State == state, ]
   
-  dataOutcome <- if(outcome =="heart attack") {11}
-  dataOutcome <- if(outcome =="heart failure") {17}
-  dataOutcome <- if(outcome == "pneumonia") {27}
+   if(outcome%in%"heart attack" == TRUE) {dataOutcome <- 11}
+   if(outcome%in%"heart failure"== TRUE) {dataOutcome <-17}
+   if(outcome%in%"pneumonia"== TRUE) {dataOutcome <-23}
   
-  dataLength <- length(stateData)
-  bestHospital <- data.frame()
-  testVar <- 99999999999999
-  
-  
-  for (i in dataLength){
-    if(stateData[i,dataOutcome]<testVar){
-      testVar <- stateData[i,dataOutcome] 
-      bestHospital <- stateData[i,]}
-    
-  }
-    
+  minNumber <- which.min(stateData[ ,dataOutcome])
+  stateData[minNumber, 2]
 
-
-
-  bestHospital[,2]
+ 
 }
